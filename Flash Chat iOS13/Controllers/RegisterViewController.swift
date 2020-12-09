@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import FirebaseAuth
+import Firebase
 
 class RegisterViewController: UIViewController {
 
@@ -18,7 +18,7 @@ class RegisterViewController: UIViewController {
         if let email = emailTextfield.text, let password = passwordTextfield.text {
             Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
                 if let error = error {
-                    print(error)
+                    print(error.localizedDescription)
                 } else {
                     //Navigate to the ChatViewController
                     self.performSegue(withIdentifier: "registerToChat", sender: self)
