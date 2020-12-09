@@ -14,10 +14,14 @@ class ChatViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var messageTextfield: UITextField!
     
+    var messages: [Message] = [Message(sender: "1@2.com", body: "Woop!")]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.dataSource = self
         title = Constants.appName
         navigationItem.hidesBackButton = true
+        
     }
     
     @IBAction func sendPressed(_ sender: UIButton) {
@@ -32,4 +36,15 @@ class ChatViewController: UIViewController {
             print("Error signing out: %@", signOutError)
         }
     }
+}
+
+extension ChatViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return messages.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.cellIdentifier, for: indexPath)
+        return cell
+    }    
 }
