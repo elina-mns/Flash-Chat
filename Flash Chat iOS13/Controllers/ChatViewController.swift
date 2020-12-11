@@ -63,7 +63,9 @@ class ChatViewController: UIViewController {
                 if let error = error {
                     print(error.localizedDescription + "Issue saving data to Firestore")
                 } else {
-                    self.loadMessages()
+                    DispatchQueue.main.async {
+                        self.messageTextfield.text = ""
+                    }
                 }
             }
         }
